@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * 工厂Bean
+ * Bean 工厂
  */
 public class BeanFactorys {
 
