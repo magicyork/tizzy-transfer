@@ -1,5 +1,6 @@
 package com.udeam.edu.dao.impl;
 
+import com.udeam.edu.factory.ConnetionUtil;
 import com.udeam.edu.pojo.Account;
 import com.udeam.edu.dao.AccountDao;
 import com.udeam.edu.utils.DruidUtils;
@@ -23,8 +24,14 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
     @Override
     public Account queryAccountByCardNo(String cardNo) throws Exception {
+
+
         //从连接池获取连接
-        Connection con = DruidUtils.getInstance().getConnection();
+        //Connection con = DruidUtils.getInstance().getConnection();
+
+        //使用当前线程的数据库连接  同一个数据库连接 控制事务操作
+        Connection con = ConnetionUtil.getconnetionUtil().getConnection();
+
         String sql = "select * from account where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setString(1,cardNo);
@@ -49,7 +56,11 @@ public class JdbcAccountDaoImpl implements AccountDao {
 
         // 从连接池获取连接
         // 改造为：从当前线程当中获取绑定的connection连接
-        Connection con = DruidUtils.getInstance().getConnection();
+        //Connection con = DruidUtils.getInstance().getConnection();
+
+
+        //使用当前线程的数据库连接  同一个数据库连接 控制事务操作
+        Connection con = ConnetionUtil.getconnetionUtil().getConnection();
         String sql = "update account set money=? where cardNo=?";
         PreparedStatement preparedStatement = con.prepareStatement(sql);
         preparedStatement.setInt(1,account.getMoney());

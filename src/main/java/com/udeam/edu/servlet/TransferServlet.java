@@ -7,6 +7,7 @@ import com.udeam.edu.utils.JsonUtils;
 import com.udeam.edu.pojo.Result;
 import com.udeam.edu.service.TransferService;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,12 +21,37 @@ import java.io.IOException;
 @WebServlet(name="transferServlet",urlPatterns = "/transferServlet")
 public class TransferServlet extends HttpServlet {
 
+
+    // private TransferServiceImpl transferService;
+
+  /*  @Override
+    public void init() throws ServletException {
+
+        try {
+            String transferService = super.getServletContext().getInitParameter("transferService");
+
+            System.out.println(transferService);
+            this.transferService = (TransferServiceImpl) Class.forName(transferService).newInstance();
+            //存入容器中
+            BeanFactorys.setBean("transferService",this.transferService);
+
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        }
+    }*/
+
     // 1. 实例化service层对象
     //private TransferService transferService = new TransferServiceImpl();
 
 
     //2 从ioc bean工厂获取
     private TransferServiceImpl transferService = (TransferServiceImpl) BeanFactorys.getBean("transferService");
+
+  
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

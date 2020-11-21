@@ -20,6 +20,8 @@ public class BeanFactorys {
 
     private final static Map<String, Object> iocMap = new HashMap<>();
 
+
+
     static {
         // 1 读取解析beans.xml  通过反射技术,生产bean对象,并将其存在map中
 
@@ -128,4 +130,11 @@ public class BeanFactorys {
         //System.out.println("icoMap = " + iocMap.get(id));
         return iocMap.get(id);
     }
+
+//
+//    public static Object setBean(String id,Object object) {
+//        //System.out.println("icoMap === " + iocMap);
+//        //System.out.println("icoMap = " + iocMap.get(id));
+//        return iocMap.put(id,object);
+//    }
 }
